@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cognitive Bias Quiz - Test Your Thinking | KeepRule</title>
+    <meta name="description" content="Take this free 15-question quiz to test your awareness of cognitive biases. Discover your blind spots and learn to think more clearly.">
+    <meta property="og:title" content="Cognitive Bias Quiz - How Biased Is Your Thinking?">
+    <meta property="og:description" content="15 questions to test your cognitive bias awareness. Discover blind spots and improve your decision-making.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://henu-wang.github.io/cognitive-bias-quiz/">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="canonical" href="https://henu-wang.github.io/cognitive-bias-quiz/">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+        body{font-family:'Inter',sans-serif}.fade-in{animation:fadeIn .4s ease}@keyframes fadeIn{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}.progress-fill{transition:width .5s ease}.option-btn{transition:all .2s ease}.option-btn:hover{transform:translateY(-2px);box-shadow:0 4px 12px rgba(0,0,0,.1)}.option-btn.selected{border-color:#0ea5e9;background:#f0f9ff}.option-btn.correct{border-color:#10b981;background:#ecfdf5}.option-btn.wrong{border-color:#ef4444;background:#fef2f2}
+    </style>
+</head>
+<body class="bg-gray-50 min-h-screen flex flex-col">
+    <header class="bg-white border-b border-gray-200">
+        <div class="max-w-3xl mx-auto px-4 py-4 flex items-center justify-between">
+            <div><h1 class="text-xl font-bold text-gray-900">Cognitive Bias Quiz</h1><p class="text-sm text-gray-500">How well do you know your thinking traps?</p></div>
+            <a href="https://keeprule.com" target="_blank" class="text-sm text-sky-600 hover:text-sky-700 font-medium">KeepRule.com &rarr;</a>
+        </div>
+    </header>
+    <main class="flex-1 max-w-3xl mx-auto px-4 py-8 w-full">
+        <div id="start-screen" class="text-center py-16 fade-in">
+            <div class="text-6xl mb-6">&#129504;</div>
+            <h2 class="text-3xl font-bold text-gray-900 mb-4">How Biased Is Your Thinking?</h2>
+            <p class="text-gray-600 mb-8 max-w-lg mx-auto">15 questions to test your awareness of cognitive biases that affect everyday decisions. Each question presents a scenario - identify the bias at play.</p>
+            <button onclick="startQuiz()" class="bg-sky-600 hover:bg-sky-700 text-white font-semibold px-8 py-4 rounded-xl text-lg transition transform hover:scale-105">Start the Quiz</button>
+            <p class="text-sm text-gray-400 mt-4">Takes about 5 minutes. No signup required.</p>
+        </div>
+        <div id="quiz-screen" style="display:none">
+            <div class="mb-8">
+                <div class="flex justify-between text-sm text-gray-500 mb-2"><span>Question <span id="q-num">1</span> of 15</span><span id="q-score">Score: 0</span></div>
+                <div class="w-full bg-gray-200 rounded-full h-2"><div id="progress-bar" class="progress-fill bg-sky-500 h-2 rounded-full" style="width:6.67%"></div></div>
+            </div>
+            <div id="question-area" class="fade-in">
+                <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6 mb-6"><p id="q-scenario" class="text-gray-700 mb-4 leading-relaxed"></p><p id="q-question" class="text-lg font-semibold text-gray-900"></p></div>
+                <div id="q-options" class="space-y-3"></div>
+                <div id="q-explanation" class="mt-6" style="display:none"></div>
+                <div id="q-next" class="mt-6 text-center" style="display:none"><button onclick="nextQuestion()" class="bg-sky-600 hover:bg-sky-700 text-white font-medium px-6 py-3 rounded-lg transition">Next Question &rarr;</button></div>
+            </div>
+        </div>
+        <div id="results-screen" style="display:none" class="fade-in"></div>
+    </main>
+    <footer class="bg-gray-900 text-gray-400 mt-12">
+        <div class="max-w-3xl mx-auto px-4 py-8 flex flex-col md:flex-row items-center justify-between gap-4">
+            <p class="text-sm">A project by <a href="https://keeprule.com" target="_blank" class="text-white hover:underline">KeepRule</a> &mdash; Practice better thinking.</p>
+            <div class="flex gap-6 text-sm">
+                <a href="https://keeprule.com/en/scenarios" target="_blank" class="hover:text-white transition">Scenarios</a>
+                <a href="https://keeprule.com/en/masters" target="_blank" class="hover:text-white transition">Masters</a>
+                <a href="https://keeprule.com" target="_blank" class="hover:text-white transition">Home</a>
+            </div>
+        </div>
+    </footer>
+    <script>
+    const questions=[
+        {scenario:"A company's stock has risen 30% in the past month. Many investors are buying in, saying 'it can only go up from here.'",question:"Which cognitive bias is most likely at play?",options:["Anchoring Bias","Bandwagon Effect","Dunning-Kruger Effect","Availability Bias"],correct:1,explanation:"The <strong>Bandwagon Effect</strong> is the tendency to adopt beliefs or behaviors because many others do. Investors jumping in because 'everyone is buying' is a classic example."},
+        {scenario:"After buying a stock at $100 that dropped to $60, an investor refuses to sell, saying 'I need to wait until I at least break even.'",question:"This behavior is best explained by:",options:["Loss Aversion","Status Quo Bias","Endowment Effect","Recency Bias"],correct:0,explanation:"<strong>Loss Aversion</strong> is the tendency to prefer avoiding losses over acquiring equivalent gains. The pain of losing feels roughly twice as intense as the pleasure of gaining."},
+        {scenario:"A hiring manager interviews a candidate who went to the same university. The manager rates them significantly higher than equally qualified candidates from other schools.",question:"Which bias is influencing the hiring manager?",options:["Confirmation Bias","Halo Effect","Affinity Bias","Attribution Error"],correct:2,explanation:"<strong>Affinity Bias</strong> is our tendency to favor people who are similar to us. Shared backgrounds can unconsciously influence our judgment of competence."},
+        {scenario:"After a plane crash makes headline news, a traveler decides to drive 500 miles instead of flying, even though driving is statistically far more dangerous.",question:"This decision is driven by:",options:["Anchoring Bias","Optimism Bias","Availability Heuristic","Framing Effect"],correct:2,explanation:"The <strong>Availability Heuristic</strong> makes us judge probability based on how easily examples come to mind. Vivid, recent events seem more likely than they are."},
+        {scenario:"A project has consumed $5 million and is clearly failing. The team argues they should continue because 'we have already invested so much.'",question:"This is an example of:",options:["Sunk Cost Fallacy","Commitment Bias","Planning Fallacy","Optimism Bias"],correct:0,explanation:"The <strong>Sunk Cost Fallacy</strong> is continuing to invest because of previously invested resources, even when future costs outweigh benefits."},
+        {scenario:"An analyst who believes a company is overvalued only reads negative news and ignores positive earnings reports.",question:"This analyst is exhibiting:",options:["Anchoring Bias","Negativity Bias","Confirmation Bias","Hindsight Bias"],correct:2,explanation:"<strong>Confirmation Bias</strong> is selectively searching for information that confirms pre-existing beliefs while dismissing contradicting evidence."},
+        {scenario:"A real estate agent shows a terrible, overpriced house first, then a mediocre house at a slightly lower price. The second house suddenly seems great.",question:"The agent is exploiting:",options:["Anchoring Bias","Contrast Effect","Framing Effect","Decoy Effect"],correct:0,explanation:"<strong>Anchoring Bias</strong> is relying too heavily on the first piece of information encountered. The terrible first house sets a mental anchor."},
+        {scenario:"After a stock market crash, an investor says 'I knew all along the market was going to crash.' But they made no moves to protect their portfolio.",question:"This is an example of:",options:["Overconfidence Bias","Self-Serving Bias","Hindsight Bias","Narrative Fallacy"],correct:2,explanation:"<strong>Hindsight Bias</strong> is believing, after an event occurs, that we would have predicted it. This makes us overconfident about predicting future events."},
+        {scenario:"A doctor tells Patient A '90% survival rate' and Patient B '10% mortality rate.' Patient A feels much more optimistic, though the statistics are identical.",question:"This demonstrates:",options:["Optimism Bias","Framing Effect","Anchoring Bias","Representativeness Heuristic"],correct:1,explanation:"The <strong>Framing Effect</strong> shows people react differently to the same information depending on how it is presented."},
+        {scenario:"A fund manager with 3 successful years credits their skill, but blames 'market conditions' during a bad year.",question:"This thinking pattern is called:",options:["Dunning-Kruger Effect","Self-Serving Bias","Overconfidence Bias","Survivorship Bias"],correct:1,explanation:"<strong>Self-Serving Bias</strong> attributes positive outcomes to our abilities and negative outcomes to external factors."},
+        {scenario:"People estimate more words start with 'K' than have 'K' as the third letter, when the opposite is true.",question:"This error comes from:",options:["Representativeness Heuristic","Base Rate Neglect","Availability Heuristic","Conjunction Fallacy"],correct:2,explanation:"The <strong>Availability Heuristic</strong> again. It is easier to think of words starting with K than words with K as the third letter, biasing frequency estimates."},
+        {scenario:"An investor holds a winning stock worth $50,000 and sells a losing stock worth $5,000, feeling they are 'managing risk.'",question:"This likely reflects:",options:["Loss Aversion","Disposition Effect","Status Quo Bias","Endowment Effect"],correct:1,explanation:"The <strong>Disposition Effect</strong> is selling winners to lock in gains while holding losers to avoid realizing losses."},
+        {scenario:"A CEO extremely confident in their new strategy ignores warnings from advisors and market research suggesting it will fail.",question:"The CEO is most likely affected by:",options:["Confirmation Bias","Dunning-Kruger Effect","Overconfidence Bias","Authority Bias"],correct:2,explanation:"<strong>Overconfidence Bias</strong> is being more confident in our judgments than is warranted, especially after past successes."},
+        {scenario:"We only hear about successful startup founders, making entrepreneurship seem less risky. We do not hear about the 90% that failed.",question:"This illustrates:",options:["Optimism Bias","Survivorship Bias","Selection Bias","Narrative Fallacy"],correct:1,explanation:"<strong>Survivorship Bias</strong> occurs when we focus on successes and ignore failures, creating a distorted view of reality."},
+        {scenario:"During a negotiation, the first person to name a price heavily influences the final outcome, even if that number was arbitrary.",question:"This phenomenon is known as:",options:["Anchoring Effect","Priming Effect","Framing Effect","Primacy Effect"],correct:0,explanation:"The <strong>Anchoring Effect</strong> shows that initial values serve as mental reference points that disproportionately influence outcomes."}
+    ];
+    let currentQ=0,score=0,answers=[];
+    function startQuiz(){document.getElementById('start-screen').style.display='none';document.getElementById('quiz-screen').style.display='block';showQuestion()}
+    function showQuestion(){
+        const q=questions[currentQ];document.getElementById('q-num').textContent=currentQ+1;document.getElementById('q-score').textContent='Score: '+score;
+        document.getElementById('progress-bar').style.width=((currentQ+1)/15*100)+'%';document.getElementById('q-scenario').textContent=q.scenario;
+        document.getElementById('q-question').textContent=q.question;document.getElementById('q-explanation').style.display='none';document.getElementById('q-next').style.display='none';
+        const od=document.getElementById('q-options');od.innerHTML='';
+        q.options.forEach((opt,i)=>{const b=document.createElement('button');b.className='option-btn w-full text-left p-4 bg-white border-2 border-gray-200 rounded-xl text-gray-700 font-medium hover:border-sky-300';b.innerHTML='<span class="inline-block w-8 h-8 bg-gray-100 rounded-full text-center leading-8 text-sm font-bold mr-3 text-gray-500">'+String.fromCharCode(65+i)+'</span>'+opt;b.onclick=()=>selectAnswer(i);od.appendChild(b)});
+        document.getElementById('question-area').className='fade-in';
+    }
+    function selectAnswer(idx){
+        const q=questions[currentQ],btns=document.querySelectorAll('.option-btn');
+        btns.forEach((b,i)=>{b.disabled=true;b.classList.remove('hover:border-sky-300');if(i===q.correct)b.classList.add('correct');if(i===idx&&idx!==q.correct)b.classList.add('wrong')});
+        const ok=idx===q.correct;if(ok)score++;answers.push({qIdx:currentQ,selected:idx,correct:ok});
+        document.getElementById('q-score').textContent='Score: '+score;
+        const ed=document.getElementById('q-explanation');ed.style.display='block';
+        ed.innerHTML='<div class="p-4 rounded-xl '+(ok?'bg-emerald-50 border border-emerald-200':'bg-amber-50 border border-amber-200')+'"><p class="font-semibold '+(ok?'text-emerald-700':'text-amber-700')+' mb-2">'+(ok?'Correct!':'Not quite.')+'</p><p class="text-gray-700 text-sm leading-relaxed">'+q.explanation+'</p></div>';
+        document.getElementById('q-next').style.display='block';document.getElementById('q-next').querySelector('button').textContent=currentQ<14?'Next Question \u2192':'See Results \u2192';
+    }
+    function nextQuestion(){currentQ++;if(currentQ>=15)showResults();else showQuestion()}
+    function showResults(){
+        document.getElementById('quiz-screen').style.display='none';const rs=document.getElementById('results-screen');rs.style.display='block';
+        let title,sub,emoji;
+        if(score>=13){emoji='\u{1F3C6}';title='Bias Master!';sub='Exceptional awareness of cognitive biases.'}
+        else if(score>=10){emoji='\u{1F31F}';title='Sharp Thinker';sub='Strong awareness with room to grow.'}
+        else if(score>=7){emoji='\u{1F4A1}';title='Developing Awareness';sub='Good foundation, but several blind spots remain.'}
+        else if(score>=4){emoji='\u{1F50D}';title='Bias Beginner';sub='Many biases are slipping past you.'}
+        else{emoji='\u26A0\uFE0F';title='Bias Blind Spot';sub='Significant blind spots. Awareness is the first step!'}
+        let h='<div class="text-center py-8"><div class="text-6xl mb-4">'+emoji+'</div><h2 class="text-3xl font-bold text-gray-900 mb-2">'+title+'</h2><p class="text-lg text-gray-600 mb-6">'+sub+'</p><div class="bg-white rounded-xl shadow-sm border border-gray-200 p-8 mb-8 inline-block"><div class="text-5xl font-bold text-sky-600">'+score+'</div><div class="text-gray-500 mt-1">out of 15 correct</div></div></div>';
+        h+='<div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6 mb-8"><h3 class="font-bold text-lg text-gray-900 mb-4">Your Breakdown</h3>';
+        answers.forEach((a,i)=>{const q=questions[a.qIdx];h+='<div class="flex items-start gap-3 py-3 '+(i<answers.length-1?'border-b border-gray-100':'')+'"><span class="text-lg mt-0.5">'+(a.correct?'\u2705':'\u274C')+'</span><div><p class="font-medium text-gray-800 text-sm">Q'+(i+1)+': '+q.question+'</p><p class="text-xs text-gray-500 mt-1">Correct: '+q.options[q.correct]+(!a.correct?' | Your answer: '+q.options[a.selected]:'')+'</p></div></div>'});
+        h+='</div>';
+        h+='<div class="bg-gradient-to-r from-sky-700 to-indigo-800 rounded-xl p-8 text-center text-white mb-8"><h3 class="text-2xl font-bold mb-3">Want to Overcome Your Biases?</h3><p class="text-sky-100 mb-5 max-w-lg mx-auto">KeepRule lets you practice decision-making with real scenarios, applying principles from the world\'s best thinkers to counter cognitive biases.</p><div class="flex flex-wrap justify-center gap-3"><a href="https://keeprule.com/en/scenarios" target="_blank" class="bg-white text-sky-700 font-semibold px-6 py-3 rounded-lg hover:bg-sky-50 transition">Practice Scenarios</a><a href="https://keeprule.com/en/masters" target="_blank" class="border border-white text-white font-semibold px-6 py-3 rounded-lg hover:bg-white/10 transition">Learn from Masters</a></div></div>';
+        h+='<div class="text-center"><button onclick="location.reload()" class="text-sky-600 hover:text-sky-700 font-medium">Retake Quiz</button></div>';
+        rs.innerHTML=h;
+    }
+    </script>
+</body>
+</html>
